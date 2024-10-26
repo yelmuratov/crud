@@ -18,7 +18,7 @@ Route::put('/users/{user}', [UserController::class, 'update'])->name('users.upda
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 //Companies route
-Route::get('/companies', [CompanyController::class, 'index']);
+Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 Route::get('/companies/create', [CompanyController::class, 'create'])->name('companies.create');
 Route::post('/companies', [CompanyController::class, 'store'])->name('companies.store');
 Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
@@ -27,7 +27,7 @@ Route::put('/companies/{company}', [CompanyController::class, 'update'])->name('
 Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy');
 
 //Products route
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');

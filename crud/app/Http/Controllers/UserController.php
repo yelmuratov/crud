@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\UserStoreRequest;
 
 class UserController extends Controller
 {
@@ -19,7 +20,7 @@ class UserController extends Controller
         return view('User.create');
     }
 
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
         $request->validate([
             'name' => 'required',

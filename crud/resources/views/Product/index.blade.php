@@ -1,6 +1,6 @@
 @extends('index')
 
-@section('title', 'Company')
+@section('title', 'Product')
 
 @section('content')
   <!-- Content Header (Page header) -->
@@ -28,7 +28,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">DataTable with minimal features & hover style</h3>
-              <a href="{{ route('companies.create') }}" class="btn btn-primary float-right">Create Company</a>
+              <a href="{{ route('products.create') }}" class="btn btn-primary float-right">Create Product</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -45,26 +45,24 @@
                     <th>ID</th>
                     <th>NAME</th>
                     <th>DESCRIPTION</th>
-                    <th>WEBSITE</th>
-                    <th>LOGO</th>
+                    <th>PRICE</th>
+                    <th>COUNT</th>
                     <th>ACTION</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($companies as $company)
+                  @foreach($products as $product)
                     <tr>
-                      <td>{{ $company->id }}</td>
-                      <td>{{ $company->name }}</td>
-                      <td>{{ $company->description }}</td>
-                      {{-- base link of company website --}}
-                      <td><a href="{{ $company->website }}" target="_blank">{{ $company->website }}</a></td>
+                      <td>{{ $product->id }}</td>
+                      <td>{{ $product->name }}</td>
+                      <td>{{ $product->description }}</td>
+                      <td>{{ $product->price }}</td>
+                      <td>{{ $product->count }}</td>
                       <td>
-                        <img src="{{ asset('images/' . $company->logo) }}" alt="{{ $company->name }}" style="width: 100px">
-                      </td>
-                      <td>
-                        <a href="{{ route('companies.edit', $company) }}" class="btn btn-primary">Edit</a>
-                        <a href="{{ route('companies.show', $company) }}" class="btn btn-success">Show</a>
-                        <form action="{{ route('companies.destroy', $company) }}" method="POST" style="display: inline-block">
+                        <a href="{{ route('products.edit', $product) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ route('products.show', $product) }}" class="btn btn-success">Show</a>
+                        {{-- delete request --}}
+                        <form action="{{ route('products.destroy', $product) }}" method="POST" style="display: inline-block">
                           @csrf
                           @method('DELETE')
                           <button type="submit" class="btn btn-danger">Delete</button>
@@ -77,7 +75,7 @@
 
               <!-- Pagination Links -->
               <div class="d-flex justify-content-center mt-3">
-                {{ $companies->links() }}
+                {{ $products->links() }}
               </div>
             </div>
             <!-- /.card-body -->

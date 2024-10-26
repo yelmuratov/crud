@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Http\Requests\CompanyUpdateRequest;
+use App\Http\Requests\CompanyStoreRequest;
 use App\Models\User;
 
 class CompanyController extends Controller
 {
     public function index()
     {   
-        $companies = Company::all();
+        $companies = Company::paginate(10);
         return view('Company.index', ['companies' => $companies]);
     }
 
@@ -21,18 +22,22 @@ class CompanyController extends Controller
         return view('Company.create',['users' => $users]);
     }
 
-    public function store(Request $request)
+    public function store(CompanyStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'address' => 'required',
-        ]);
-
-        Company::create($request->all());
-
-        return redirect()->route('companies.index')
-            ->with('success', 'Company created successfully.');
+        try{
+            if($request->hasFile('logo')){
+                $file = $request->file('logo');
+                $fileName = time().'_'.$file->getClientOriginalName();
+                $file->move(public_path('uploads'), $fileName);
+                $request->merge(['logo' => $fileName]);
+                
+                Company::create($request->all());
+                return redirect()->route('companies.index')
+                    ->with('success', 'Company created successfully.');
+            }
+        }catch(\Exception $e){
+            dd($e);
+        }
     }
 
     public function show(Company $company)
