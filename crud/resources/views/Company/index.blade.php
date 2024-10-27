@@ -59,7 +59,7 @@
                       {{-- base link of company website --}}
                       <td><a href="{{ $company->website }}" target="_blank">{{ $company->website }}</a></td>
                       <td>
-                        <img src="{{ asset('images/' . $company->logo) }}" alt="{{ $company->name }}" style="width: 100px">
+                        <img src="{{ asset('images' . $company->logo) }}" alt="{{ $company->name }}" style="width: 100px">
                       </td>
                       <td>
                         <a href="{{ route('companies.edit', $company) }}" class="btn btn-primary">Edit</a>

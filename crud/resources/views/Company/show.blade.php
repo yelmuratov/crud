@@ -12,16 +12,16 @@
                 <td>{{ $company->name }}</td>
             </tr>
             <tr>
-                <th>Email</th>
-                <td>{{ $company->email }}</td>
+                <th>Description</th>
+                <td>{{ $company->description }}</td>
             </tr>
             <tr>
-                <th>Created At</th>
-                <td>{{ $company->created_at }}</td>
+                <th>Website</th>
+                <td>{{ $company->website }}</td>
             </tr>
             <tr>
-                <th>Updated At</th>
-                <td>{{ $company->updated_at }}</td>
+                <th>Logo</th>
+                <td>{{ $company->logo }}</td>
             </tr>
             </table>
             <a href="{{ route('companies.edit', $company) }}" class="btn btn-warning mt-3">Edit</a>

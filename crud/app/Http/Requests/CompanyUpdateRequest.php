@@ -26,7 +26,6 @@ class CompanyUpdateRequest extends FormRequest
             'name' => 'required|string|max:255',
             "description" => "required|string",
             'website' => 'nullable|url|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
@@ -42,9 +41,6 @@ class CompanyUpdateRequest extends FormRequest
             'description.string' => 'Company description must be a string',
             'website.url' => 'Company website must be a valid URL',
             'website.max' => 'Company website must not exceed 255 characters',
-            'logo.image' => 'Company logo must be an image',
-            'logo.mimes' => 'Company logo must be a file of type: jpeg, png, jpg, gif, svg',
-            'logo.max' => 'Company logo must not be larger than 2048 kilobytes',
         ];
     }
 }

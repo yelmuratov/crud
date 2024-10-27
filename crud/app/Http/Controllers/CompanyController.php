@@ -26,10 +26,16 @@ class CompanyController extends Controller
     {
         try{
             if($request->hasFile('logo')){
-                $image = date("Y-m-d-H-i-s") . '.' . $request->logo->extension();
-                $request->logo->move(public_path('images'), $image);
+                $imageName = date('Y-m-d')."_".time().'.'.$request->logo->extension();
+                $request->logo->move(public_path('images'), $imageName);
 
-                dd($image);
+                Company::create($request->all());
+
+                return redirect()->route('companies.index')
+                    ->with('success', 'Company created successfully.');
+            }else{
+                return redirect()->route('companies.index')
+                    ->with('error', 'Company logo is required.');
             }
         }catch(\Exception $e){
             dd($e);
@@ -42,16 +48,21 @@ class CompanyController extends Controller
     }
 
     public function edit(Company $company)
-    {
-        return view('Company.edit', compact('company'));
+    {   
+        $users = User::all();
+        return view('Company.edit', compact('company'),['users' => $users]);
     }
 
     public function update(CompanyUpdateRequest $request, Company $company)
     {       
-        $company->update($request->all());
+        try{
+            $company->update($request->all());
 
-        return redirect()->route('companies.index')
+            return redirect()->route('companies.index')
             ->with('success', 'Company updated successfully');
+        }catch(\Exception $e){
+            dd($e);
+        }
     }
 
     public function destroy(Company $company)
