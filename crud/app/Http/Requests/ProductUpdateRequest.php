@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductStoreRequest extends FormRequest
+class ProductUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class ProductStoreRequest extends FormRequest
             "name" => "required|string|max:255",
             "price" => "required|numeric|min:0",
             "description" => "required|string|max:255",
-            "count" => "required|numeric|min:0",  
+            "count" => "required|numeric|min:0",   
         ];
     }
 
@@ -47,4 +47,4 @@ class ProductStoreRequest extends FormRequest
             "count.min" => "Count must be a positive number",
         ];
     }
-    }
+}

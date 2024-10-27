@@ -26,14 +26,10 @@ class CompanyController extends Controller
     {
         try{
             if($request->hasFile('logo')){
-                $file = $request->file('logo');
-                $fileName = time().'_'.$file->getClientOriginalName();
-                $file->move(public_path('uploads'), $fileName);
-                $request->merge(['logo' => $fileName]);
-                
-                Company::create($request->all());
-                return redirect()->route('companies.index')
-                    ->with('success', 'Company created successfully.');
+                $image = date("Y-m-d-H-i-s") . '.' . $request->logo->extension();
+                $request->logo->move(public_path('images'), $image);
+
+                dd($image);
             }
         }catch(\Exception $e){
             dd($e);

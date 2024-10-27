@@ -6,6 +6,20 @@
     <form action="{{ route('products.update', $product) }}" method="POST">
         @csrf
         @method('PUT')
+
+        {{-- company name --}}
+        <div class="form-group">
+            <label for="company">Company:</label>
+            <select class="form-control" id="company" name="company_id" required>
+                <option value="">Select Company</option>
+                @foreach ($companies as $company)
+                    <option value="{{ $company->id }}" {{ $product->company_id == $company->id ? 'selected' : '' }}>{{ $company->name }}</option>
+                @endforeach
+            </select>
+            @error('company_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
         
         <div class="form-group">
             <label for="name">Product Name:</label>

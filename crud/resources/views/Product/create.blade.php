@@ -20,6 +20,15 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <div class="form-group">
+            <label for="company">Company:</label>
+            <select class="form-control" id="company" name="company_id" required>
+                <option value="">Select Company</option>
+                @foreach ($companies as $company)
+                    <option value="{{ $company->id }}" {{ old('company_id') == $company->id ? 'selected' : '' }}>{{ $company->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label for="price">Price:</label>
             <input type="number" class="form-control" id="price" name="price" value="{{ old('price') }}" required>
         </div>

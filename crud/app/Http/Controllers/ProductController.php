@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Company;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Http\Requests\ProductStoreRequest;
 
@@ -17,17 +18,12 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('Product.create');
+        $companies = Company::all();
+        return view('Product.create',['companies' => $companies]);
     }
 
     public function store(ProductStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'description' => 'required',
-        ]);
-
         Product::create($request->all());
 
         return redirect()->route('products.index')
@@ -40,8 +36,9 @@ class ProductController extends Controller
     }
 
     public function edit(Product $product)
-    {
-        return view('Product.edit', compact('product'));
+    {   
+        $companies = Company::all();
+        return view('Product.edit', compact('product'),['companies' => $companies]);
     }
 
     public function update(ProductUpdateRequest $request, Product $product)

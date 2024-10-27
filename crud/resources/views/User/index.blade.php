@@ -56,8 +56,7 @@
                       <td>{{ $user->email }}</td>
                       <td>
                         <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">Edit</a>
-                        <a href="{{ route('users.show', $user) }}" class="btn btn-success">show</a>
-                        {{-- delete request --}}
+                        <a href="{{ route('users.show', $user) }}" class="btn btn-success">Show</a>
                         <form action="{{ route('users.destroy', $user) }}" method="POST" style="display: inline-block">
                           @csrf
                           @method('DELETE')
@@ -68,6 +67,10 @@
                   @endforeach
                 </tbody>
               </table>
+              <div class="d-flex justify-content-center">
+                {{ $users->links() }}
+              </div>
+              
             </div>
             <!-- /.card-body -->
           </div>
