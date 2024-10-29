@@ -20,12 +20,14 @@ class MealController extends Controller
         if ($request->has('ingredient_ids')) {
             $meal->ingredients()->sync($request->ingredient_ids);
         }
-        return redirect()->route('meals.index');
+        
+        return redirect()->route('meals.index')->with('message', 'Meal created successfully');
     }
 
     public function create()
     {   
         $ingredients = Ingredient::all();
+        
         return view('Meals.create', ['ingredients' => $ingredients]);
     }
 
@@ -55,6 +57,6 @@ class MealController extends Controller
         // Many to many meal ingredient relationship is deleted
         $meal->ingredients()->detach();
         $meal->delete();
-        return redirect()->route('meals.index');
+        return redirect()->route('meals.index')->with('message', 'Meal deleted successfully');
     }
 }

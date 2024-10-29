@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IngredientStoreRequest;
+use App\Http\Requests\IngredientUpdateRequest;
 use App\Models\Ingredient;
-use Illuminate\Http\Request;
 
 class IngredientController extends Controller
 {
@@ -18,10 +19,14 @@ class IngredientController extends Controller
         return view('Ingredients.create');
     }
 
-    public function store(Request $request)
+    public function store(IngredientStoreRequest $request)
     {   
-        Ingredient::create($request->only('name'));
-        return redirect()->route('ingredients.index')->with('success', 'Ingredient created successfully'); 
+        try{
+            Ingredient::create($request->only('name'));
+            return redirect()->route('ingredients.index')->with('success', 'Ingredient created successfully'); 
+        }catch(\Exception $e){
+            dd($e->getMessage());
+        }
     }
 
     public function show(Ingredient $ingredient)
@@ -34,7 +39,7 @@ class IngredientController extends Controller
         return view('Ingredients.edit', ['ingredient' => $ingredient]);
     }
 
-    public function update(Request $request, Ingredient $ingredient)
+    public function update(IngredientUpdateRequest $request, Ingredient $ingredient)
     {
         $ingredient->update($request->only('name'));
         return redirect()->route('ingredients.index')->with('success', 'Ingredient updated successfully');
