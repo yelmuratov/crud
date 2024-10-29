@@ -11,7 +11,7 @@ class IngredientUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,6 @@ class IngredientUpdateRequest extends FormRequest
     {
         return [
             "name" => "string",
-            "meals" => "nullable|required|array",
-            "meals.*.name" => "required|string",
         ];
     }
 
@@ -32,10 +30,6 @@ class IngredientUpdateRequest extends FormRequest
     {
         return [
             "name.string" => "Name must be a string",
-            "meals.required" => "Meals are required",
-            "meals.array" => "Meals must be an array",
-            "meals.*.name.required" => "Meal name is required",
-            "meals.*.name.string" => "Meal name must be a string",
         ];
     }
 }
