@@ -45,7 +45,6 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Ingredients</th>
-                    <th>Created At</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -56,14 +55,12 @@
                       <td>{{ $meal->name }}</td>
                       <td>
                         @foreach($meal->ingredients as $ingredient)
-                          {{ $ingredient->name }}{{ !$loop->last ? ', ' : '' }}
+                          {{ $ingredient->name }}
                         @endforeach
                       </td>
-                      <td>{{ $meal->created_at }}</td>
                       <td>
                         <a href="{{ route('meals.edit', $meal) }}" class="btn btn-primary">Edit</a>
                         <a href="{{ route('meals.show', $meal) }}" class="btn btn-success">Show</a>
-                        {{-- delete request --}}
                         <form action="{{ route('meals.destroy', $meal) }}" method="POST" style="display: inline-block">
                           @csrf
                           @method('DELETE')
@@ -74,11 +71,6 @@
                   @endforeach
                 </tbody>
               </table>
-
-              <!-- Pagination Links -->
-              <div class="d-flex justify-content-center mt-3">
-                {{ $meals->links() }}
-              </div>
             </div>
             <!-- /.card-body -->
           </div>

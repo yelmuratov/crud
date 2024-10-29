@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\MainController;
 
-Route::get('/',[MealController::class, 'index']);
 
+Route::get('/',[MainController::class, 'index'])->name('index');
 // Meals routes
 Route::get('/meals', [MealController::class, 'index'])->name('meals.index');
 Route::get('/meals/create', [MealController::class, 'create'])->name('meals.create');

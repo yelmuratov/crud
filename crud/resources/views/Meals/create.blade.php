@@ -14,10 +14,10 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <!-- Ingredients Selection -->
+        <!-- Ingredients Selection with Bootstrap Select -->
         <div class="form-group">
             <label for="ingredients">Ingredients:</label>
-            <select class="form-control" id="ingredients" name="ingredient_ids[]" multiple required>
+            <select class="form-control selectpicker" id="ingredients" name="ingredient_ids[]" multiple data-live-search="true" data-style="btn-primary" title="Select ingredients" required>
                 @foreach ($ingredients as $ingredient)
                     <option value="{{ $ingredient->id }}" {{ in_array($ingredient->id, old('ingredient_ids', [])) ? 'selected' : '' }}>
                         {{ $ingredient->name }}
@@ -29,7 +29,16 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <button type="submit" class="btn btn-primary">Add Meal</button>
+        <button type="submit" class="btn btn-primary mt-3">Add Meal</button>
     </form>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        // Initialize Bootstrap Select
+        $('.selectpicker').selectpicker();
+    });
+</script>
 @endsection

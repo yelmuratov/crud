@@ -44,37 +44,33 @@
                   <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
+                    <th>Meals</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($ingredients as $ingredient)
+                  @foreach ($ingredients as $ingredient)
                     <tr>
                       <td>{{ $ingredient->id }}</td>
                       <td>{{ $ingredient->name }}</td>
-                      <td>{{ $ingredient->created_at }}</td>
-                      <td>{{ $ingredient->updated_at }}</td>
                       <td>
-                        <a href="{{ route('ingredients.edit', $ingredient) }}" class="btn btn-primary">Edit</a>
-                        <a href="{{ route('ingredients.show', $ingredient) }}" class="btn btn-success">Show</a>
-                        {{-- delete request --}}
-                        <form action="{{ route('ingredients.destroy', $ingredient) }}" method="POST" style="display: inline-block">
+                        @foreach ($ingredient->meals as $meal)
+                          {{ $meal->name }}
+                        @endforeach
+                      <td>
+                        <a href="{{ route('ingredients.edit', $ingredient->id) }}" class="btn btn-primary">Edit</a>
+                        <form action="{{ route('ingredients.destroy', $ingredient->id) }}" method="POST" class="d-inline">
                           @csrf
                           @method('DELETE')
-                          <button type="submit" class="btn btn-danger">Delete</button>
+                          <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
                       </td>
-                    </tr>
+                    </tr> 
+                    
+                      
                   @endforeach
                 </tbody>
               </table>
-
-              <!-- Pagination Links -->
-              <div class="d-flex justify-content-center mt-3">
-                {{ $ingredients->links() }}
-              </div>
             </div>
             <!-- /.card-body -->
           </div>

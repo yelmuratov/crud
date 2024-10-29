@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 class IngredientController extends Controller
 {
     public function index()
-    {
-        return Ingredient::with('meals')->get();
+    {   
+        $ingredients = Ingredient::all();
+        return view('Ingredients.index', ['ingredients' => $ingredients]);
     }
 
     public function store(Request $request)

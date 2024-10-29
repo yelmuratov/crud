@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Meal;
 use Illuminate\Http\Request;
+use App\Models\Ingredient;
 
 class MealController extends Controller
 {
     public function index()
-    {
-        return Meal::with('ingredients')->get();
+    {   
+        $meals = Meal::all();
+        return view('Meals.index', ['meals' => $meals]);
     }
 
     public function store(Request $request)
@@ -18,7 +20,13 @@ class MealController extends Controller
         if ($request->has('ingredient_ids')) {
             $meal->ingredients()->sync($request->ingredient_ids);
         }
-        return $meal;
+        return redirect()->route('meals.index');
+    }
+
+    public function create()
+    {   
+        $ingredients = Ingredient::all();
+        return view('Meals.create', ['ingredients' => $ingredients]);
     }
 
     public function show(Meal $meal)
