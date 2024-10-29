@@ -10,7 +10,7 @@ class MealController extends Controller
 {
     public function index()
     {   
-        $meals = Meal::all();
+        $meals = Meal::paginate(10);
         return view('Meals.index', ['meals' => $meals]);
     }
 
@@ -31,7 +31,13 @@ class MealController extends Controller
 
     public function show(Meal $meal)
     {
-        return $meal->load('ingredients');
+        return view('Meals.show', ['meal' => $meal]);
+    }
+
+    public function edit(Meal $meal)
+    {
+        $ingredients = Ingredient::all();
+        return view('Meals.edit', ['meal' => $meal, 'ingredients' => $ingredients]);
     }
 
     public function update(Request $request, Meal $meal)
@@ -40,12 +46,15 @@ class MealController extends Controller
         if ($request->has('ingredient_ids')) {
             $meal->ingredients()->sync($request->ingredient_ids);
         }
-        return $meal;
+
+        return redirect()->route('meals.index')->with('message', 'Meal updated successfully');
     }
 
     public function destroy(Meal $meal)
-    {
+    {   
+        // Many to many meal ingredient relationship is deleted
+        $meal->ingredients()->detach();
         $meal->delete();
-        return response()->noContent();
+        return redirect()->route('meals.index');
     }
 }

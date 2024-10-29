@@ -12,12 +12,12 @@
                         <td>{{ $ingredient->name }}</td>
                     </tr>
                     <tr>
-                        <th>Created At</th>
-                        <td>{{ $ingredient->created_at }}</td>
-                    </tr>
-                    <tr>
-                        <th>Updated At</th>
-                        <td>{{ $ingredient->updated_at }}</td>
+                        <th>Meals</th>
+                        <td>
+                            @foreach ($ingredient->meals as $meal)
+                                {{ $meal->name }}
+                            @endforeach
+                        </td>
                     </tr>
                 </table>
                 <a href="{{ route('ingredients.edit', $ingredient) }}" class="btn btn-warning mt-3">Edit</a>

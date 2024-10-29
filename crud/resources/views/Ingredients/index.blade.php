@@ -50,27 +50,30 @@
                 </thead>
                 <tbody>
                   @foreach ($ingredients as $ingredient)
-                    <tr>
+                    <tr id="ingredient-{{ $ingredient->id }}">
                       <td>{{ $ingredient->id }}</td>
                       <td>{{ $ingredient->name }}</td>
                       <td>
                         @foreach ($ingredient->meals as $meal)
                           {{ $meal->name }}
                         @endforeach
+                      </td>
                       <td>
                         <a href="{{ route('ingredients.edit', $ingredient->id) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ route('ingredients.show', $ingredient->id) }}" class="btn btn-info">Show</a>
                         <form action="{{ route('ingredients.destroy', $ingredient->id) }}" method="POST" class="d-inline">
                           @csrf
                           @method('DELETE')
-                          <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                          <button type="submit" class="btn btn-danger delete-ingredient" data-id="{{ $ingredient->id }}">Delete</button>
                         </form>
                       </td>
                     </tr> 
-                    
-                      
                   @endforeach
                 </tbody>
               </table>
+              <div class="d-flex justify-content-center mt-3">
+                {{ $ingredients->links() }}
+              </div>
             </div>
             <!-- /.card-body -->
           </div>
@@ -82,4 +85,37 @@
     <!-- /.container-fluid -->
   </section>
   <!-- /.content -->
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        // Handle delete button click
+        $('.delete-ingredient').on('click', function(e) {
+            e.preventDefault();
+
+            let ingredientId = $(this).data('id');
+            let url = "{{ route('ingredients.destroy', ':id') }}".replace(':id', ingredientId);
+
+            if (confirm('Are you sure you want to delete this ingredient?')) {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        '_method': 'DELETE',
+                        '_token': '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        // Remove the ingredient row from the table
+                        $('#ingredient-' + ingredientId).remove();
+                        alert('Ingredient deleted successfully.');
+                    },
+                    error: function(xhr) {
+                        alert('Something went wrong. Please try again.');
+                    }
+                });
+            }
+        });
+    });
+</script>
 @endsection

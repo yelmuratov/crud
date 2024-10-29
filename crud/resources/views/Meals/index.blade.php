@@ -71,6 +71,10 @@
                   @endforeach
                 </tbody>
               </table>
+              {{-- Paginate --}}
+              <div class="d-flex justify-content-center">
+                {!! $meals->links() !!}
+              </div>
             </div>
             <!-- /.card-body -->
           </div>

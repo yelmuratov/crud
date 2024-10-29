@@ -13,6 +13,7 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <button type="submit" class="btn btn-primary">Add Ingredient</button>
+        <a href="{{ route('ingredients.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection
