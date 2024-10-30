@@ -14,4 +14,14 @@ class Faculty extends Model
         "created_at",
         "updated_at"
     ];
+
+    // Relationship with University
+    public function University()
+    {
+        return $this->belongsTo(University::class);
+    }
+
+    public function Majors(){
+        return $this->hasMany(Faculty::class,"faculty_id","id");
+    }
 }

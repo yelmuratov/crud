@@ -15,4 +15,15 @@ class Major extends Model
         "created_at",
         "updated_at",
     ];
+
+    // Relationship with Faculty
+    public function faculties()
+    {
+        return $this->belongsTo(Faculty::class);
+    }
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
+    }
 }

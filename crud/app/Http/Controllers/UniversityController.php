@@ -12,8 +12,11 @@ class UniversityController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+        $universities = University::paginate(10);
+        return view("University.index", [
+            "universities" => $universities
+        ]);
     }
 
     /**

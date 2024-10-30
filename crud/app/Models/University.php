@@ -13,4 +13,10 @@ class University extends Model
     protected $fillable = [
         "name",
     ];
+
+    // Relationship with Faculty
+    public  function faculties()
+    {
+        return $this->hasMany(Faculty::class);
+    }
 }

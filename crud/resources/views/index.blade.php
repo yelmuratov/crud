@@ -180,25 +180,39 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Companies -->
+          <!-- Universities -->
           <li class="nav-item">
-            <a href="/companies" class="nav-link">
-              <i class="nav-icon fas fa-building"></i>
-              <p>Companies</p>
+            <a href="/universities" class="nav-link">
+              <i class="nav-icon fas fa-university"></i>
+              <p>Universities</p>
             </a>
           </li>
-          <!-- Users -->
+          <!-- Faculties -->
           <li class="nav-item">
-            <a href="/users" class="nav-link">
+            <a href="/faculties" class="nav-link">
+              <i class="nav-icon fas fa-chalkboard-teacher"></i>
+              <p>Faculties</p>
+            </a>
+          </li>
+          <!-- Majors -->
+          <li class="nav-item">
+            <a href="/majors" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>Majors</p>
+            </a>
+          </li>
+          <!-- Groups -->
+          <li class="nav-item">
+            <a href="/groups" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
-              <p>Users</p>
+              <p>Groups</p>
             </a>
           </li>
-          <!-- Products -->
+          <!-- Students -->
           <li class="nav-item">
-            <a href="/products" class="nav-link">
-              <i class="nav-icon fas fa-box"></i>
-              <p>Products</p>
+            <a href="/students" class="nav-link">
+              <i class="nav-icon fas fa-user-graduate"></i>
+              <p>Students</p>
             </a>
           </li>
         </ul>

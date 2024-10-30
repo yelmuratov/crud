@@ -16,4 +16,10 @@ class Student extends Model
         "created_at",
         "updated_at",
     ];
+
+    // Relationship with Group
+    public function student()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }
