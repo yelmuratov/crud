@@ -170,7 +170,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="/" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
@@ -245,52 +245,83 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150</h3>
-                <p>Users</p>
+          <div class="row">
+              <div class="col-lg-2 col-6">
+                  <!-- small box -->
+                  <div class="small-box bg-info">
+                      <div class="inner">
+                          <h3>{{ $universityCount }}</h3>
+                          <p>Universities</p>
+                      </div>
+                      <div class="icon">
+                          <i class="ion ion-bag"></i>
+                      </div>
+                      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
               </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
+              <!-- ./col -->
+              <div class="col-lg-2 col-6">
+                  <!-- small box -->
+                  <div class="small-box bg-success">
+                      <div class="inner">
+                          <h3>{{ $facilitiesCount }}</h3>
+                          <p>Faculties</p>
+                      </div>
+                      <div class="icon">
+                          <i class="ion ion-stats-bars"></i>
+                      </div>
+                      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
+              <!-- ./col -->
+              <div class="col-lg-2 col-6">
+                  <!-- small box -->
+                  <div class="small-box bg-warning">
+                      <div class="inner">
+                          <h3>{{ $majorsCount }}</h3>
+                          <p>Majors</p>
+                      </div>
+                      <div class="icon">
+                          <i class="ion ion-person-add"></i>
+                      </div>
+                      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-2 col-6">
+                  <!-- small box -->
+                  <div class="small-box bg-warning">
+                      <div class="inner">
+                          <h3>{{ $groupsCount }}</h3>
+                          <p>Groups</p>
+                      </div>
+                      <div class="icon">
+                          <i class="ion ion-person-add"></i>
+                      </div>
+                      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-2 col-6">
+                  <!-- small box -->
+                  <div class="small-box bg-warning">
+                      <div class="inner">
+                          <h3>{{ $studentCount }}</h3>
+                          <p>Students</p>
+                      </div>
+                      <div class="icon">
+                          <i class="ion ion-person-add"></i>
+                      </div>
+                      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
+              </div>
+              <!-- ./col -->
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-                <p>Companies</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>44</h3>
-                <p>Products</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-        </div>
-        @yield('content')
+          <!-- /.row -->
+          @yield('content')
       </div>
-    </section>
+      <!-- /.container-fluid -->
+  </section>  
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
