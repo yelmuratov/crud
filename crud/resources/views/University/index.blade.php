@@ -44,9 +44,7 @@
                   <tr>
                     <th>ID</th>
                     <th>NAME</th>
-                    <th>DESCRIPTION</th>
-                    <th>WEBSITE</th>
-                    <th>LOGO</th>
+                    <th>FACULTIES</th>
                     <th>ACTION</th>
                   </tr>
                 </thead>
@@ -55,12 +53,7 @@
                     <tr>
                       <td>{{ $university->id }}</td>
                       <td>{{ $university->name }}</td>
-                      <td>{{ $university->description }}</td>
-                      {{-- base link of university website --}}
-                      <td><a href="{{ $university->website }}" target="_blank">{{ $university->website }}</a></td>
-                      <td>
-                        <img src="{{ asset('images' . $university->logo) }}" alt="{{ $university->name }}" style="width: 100px">
-                      </td>
+                      <td>{{ $university->faculties->count() }}</td>
                       <td>
                         <a href="{{ route('universities.edit', $university) }}" class="btn btn-primary">Edit</a>
                         <a href="{{ route('universities.show', $university) }}" class="btn btn-success">Show</a>

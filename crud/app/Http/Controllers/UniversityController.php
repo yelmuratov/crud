@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUniversityRequest;
 use App\Http\Requests\UpdateUniversityRequest;
 use App\Models\University;
+use App\Models\Faculty;
+use App\Models\Major;
+use App\Models\Group;
+use App\Models\Student;
 
 class UniversityController extends Controller
 {
@@ -12,10 +16,20 @@ class UniversityController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
+    {       
+        $universityCount = University::count();
+        $facilitiesCount = Faculty::count();
+        $majorsCount = Major::count();
+        $groupsCount = Group::count();
+        $studentCount = Student::count();
         $universities = University::paginate(10);
         return view("University.index", [
-            "universities" => $universities
+            "universities" => $universities,
+            "universityCount" => $universityCount,
+            "facilitiesCount" => $facilitiesCount,
+            "majorsCount" => $majorsCount,
+            "groupsCount" => $groupsCount,
+            "studentCount" => $studentCount,
         ]);
     }
 
