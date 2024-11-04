@@ -9,6 +9,7 @@ use App\Models\Faculty;
 use App\Models\Major;
 use App\Models\Group;
 use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 
 class UniversityController extends Controller
 {
@@ -16,21 +17,14 @@ class UniversityController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {       
-        $universityCount = University::count();
-        $facilitiesCount = Faculty::count();
-        $majorsCount = Major::count();
-        $groupsCount = Group::count();
-        $studentCount = Student::count();
+    {
+        $counts = $this->getCounts(); // Get global counts
+
         $universities = University::paginate(10);
-        return view("University.index", [
+
+        return view("University.index", array_merge([
             "universities" => $universities,
-            "universityCount" => $universityCount,
-            "facilitiesCount" => $facilitiesCount,
-            "majorsCount" => $majorsCount,
-            "groupsCount" => $groupsCount,
-            "studentCount" => $studentCount,
-        ]);
+        ], $counts));
     }
 
     /**
@@ -38,7 +32,7 @@ class UniversityController extends Controller
      */
     public function create()
     {
-        //
+        return view("University.create");
     }
 
     /**
@@ -46,7 +40,8 @@ class UniversityController extends Controller
      */
     public function store(StoreUniversityRequest $request)
     {
-        //
+        University::create($request->validated());
+        return redirect()->route("universities.index");
     }
 
     /**
@@ -54,7 +49,12 @@ class UniversityController extends Controller
      */
     public function show(University $university)
     {
-        //
+        $counts = $this->getCounts($university); // Get counts for specific university
+
+        return view('University.show', array_merge([
+            'university' => $university,
+            'counts' => $counts,
+        ]));
     }
 
     /**
@@ -62,7 +62,57 @@ class UniversityController extends Controller
      */
     public function edit(University $university)
     {
-        //
+        return view("University.edit", ["university" => $university]);
+    }
+
+    private function getCounts(University $university = null)
+    {
+        if ($university) {
+            // Counts for a specific university
+            $facultiesCount = DB::table('faculties')
+                ->where('university_id', $university->id)
+                ->count();
+
+            $majorsCount = DB::table('majors')
+                ->join('faculties', 'majors.faculty_id', '=', 'faculties.id')
+                ->where('faculties.university_id', $university->id)
+                ->count('majors.id');
+
+            $groupsCount = DB::table('groups')
+                ->join('majors', 'groups.major_id', '=', 'majors.id')
+                ->join('faculties', 'majors.faculty_id', '=', 'faculties.id')
+                ->where('faculties.university_id', $university->id)
+                ->count('groups.id');
+
+            $studentsCount = DB::table('students')
+                ->join('groups', 'students.group_id', '=', 'groups.id')
+                ->join('majors', 'groups.major_id', '=', 'majors.id')
+                ->join('faculties', 'majors.faculty_id', '=', 'faculties.id')
+                ->where('faculties.university_id', $university->id)
+                ->count('students.id');
+
+            return [
+                'facultiesCount' => $facultiesCount,
+                'majorsCount' => $majorsCount,
+                'groupsCount' => $groupsCount,
+                'studentsCount' => $studentsCount,
+            ];
+        } else {
+            // Global counts
+            $universityCount = University::count();
+            $facultiesCount  = Faculty::count();
+            $majorsCount     = Major::count();
+            $groupsCount     = Group::count();
+            $studentsCount   = Student::count();
+
+            return [
+                'universityCount' => $universityCount,
+                'facultiesCount'  => $facultiesCount,
+                'majorsCount'     => $majorsCount,
+                'groupsCount'     => $groupsCount,
+                'studentsCount'   => $studentsCount,
+            ];
+        }
     }
 
     /**
@@ -70,7 +120,8 @@ class UniversityController extends Controller
      */
     public function update(UpdateUniversityRequest $request, University $university)
     {
-        //
+        $university->update($request->validated());
+        return redirect()->route("universities.index");
     }
 
     /**
@@ -78,6 +129,7 @@ class UniversityController extends Controller
      */
     public function destroy(University $university)
     {
-        //
+        $university->delete();
+        return redirect()->back();
     }
 }

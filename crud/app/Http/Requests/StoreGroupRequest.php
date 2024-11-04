@@ -11,7 +11,7 @@ class StoreGroupRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,20 @@ class StoreGroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'major_id' => 'required|integer|exists:majors,id',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Tên lớp không được để trống',
+            'name.string' => 'Tên lớp phải là chuỗi',
+            'name.max' => 'Tên lớp không được vượt quá 255 ký tự',
+            'major_id.required' => 'Mã ngành không được để trống',
+            'major_id.integer' => 'Mã ngành phải là số nguyên',
+            'major_id.exists' => 'Mã ngành không tồn tại',
         ];
     }
 }

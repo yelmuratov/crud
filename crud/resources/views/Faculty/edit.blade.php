@@ -2,58 +2,35 @@
 
 @section('content')
 <div class="container">
-    <h2>Edit Product</h2>
-    <form action="{{ route('products.update', $product) }}" method="POST">
+    <h2>Edit Faculty</h2>
+    <form action="{{ route('faculties.update', $faculty) }}" method="POST">
         @csrf
         @method('PUT')
 
-        {{-- company name --}}
+        {{-- university name --}}
         <div class="form-group">
-            <label for="company">Company:</label>
-            <select class="form-control" id="company" name="company_id" required>
-                <option value="">Select Company</option>
-                @foreach ($companies as $company)
-                    <option value="{{ $company->id }}" {{ $product->company_id == $company->id ? 'selected' : '' }}>{{ $company->name }}</option>
+            <label for="university">University:</label>
+            <select class="form-control" id="university" name="university_id" required>
+                <option value="">Select University</option>
+                @foreach ($universities as $university)
+                    <option value="{{ $university->id }}" {{ $faculty->university_id == $university->id ? 'selected' : '' }}>{{ $university->name }}</option>
                 @endforeach
             </select>
-            @error('company_id')
+            @error('university_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
         
         <div class="form-group">
-            <label for="name">Product Name:</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ $product->name }}" required>
+            <label for="name">Faculty Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ $faculty->name }}" required>
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea class="form-control" id="description" name="description" required>{{ $product->description }}</textarea>
-            @error('description')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="price">Price:</label>
-            <input type="number" class="form-control" id="price" name="price" value="{{ $product->price }}" required>
-            @error('price')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="count">Count:</label>
-            <input type="number" class="form-control" id="price" name="count" value="{{ $product->count }}" required>
-            @error('count')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
-
         <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ route('faculties.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

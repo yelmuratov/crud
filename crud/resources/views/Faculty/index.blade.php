@@ -1,6 +1,6 @@
 @extends('index')
 
-@section('title', 'Product')
+@section('title', 'Faculties')
 
 @section('content')
   <!-- Content Header (Page header) -->
@@ -8,12 +8,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>DataTables</h1>
+          <h1>Faculties</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">DataTables</li>
+            <li class="breadcrumb-item active">Faculties</li>
           </ol>
         </div>
       </div>
@@ -27,8 +27,8 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
-              <a href="{{ route('products.create') }}" class="btn btn-primary float-right">Create Product</a>
+              <h3 class="card-title">List of Faculties</h3>
+              <a href="{{ route('faculties.create') }}" class="btn btn-primary float-right">Create Faculty</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -43,39 +43,35 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>NAME</th>
-                    <th>DESCRIPTION</th>
-                    <th>PRICE</th>
-                    <th>COUNT</th>
-                    <th>ACTION</th>
+                    <th>Name</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($products as $product)
+                  @forelse($faculties as $faculty)
                     <tr>
-                      <td>{{ $product->id }}</td>
-                      <td>{{ $product->name }}</td>
-                      <td>{{ $product->description }}</td>
-                      <td>{{ $product->price }}</td>
-                      <td>{{ $product->count }}</td>
+                      <td>{{ $faculty->id }}</td>
+                      <td>{{ $faculty->name }}</td>
                       <td>
-                        <a href="{{ route('products.edit', $product) }}" class="btn btn-primary">Edit</a>
-                        <a href="{{ route('products.show', $product) }}" class="btn btn-success">Show</a>
-                        {{-- delete request --}}
-                        <form action="{{ route('products.destroy', $product) }}" method="POST" style="display: inline-block">
+                        <a href="{{ route('faculties.show', $faculty) }}" class="btn btn-info">View</a>
+                        <a href="{{ route('faculties.edit', $faculty) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('faculties.destroy', $faculty) }}" method="POST" class="d-inline">
                           @csrf
                           @method('DELETE')
-                          <button type="submit" class="btn btn-danger">Delete</button>
+                          <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this faculty?')">Delete</button>
                         </form>
                       </td>
                     </tr>
-                  @endforeach
-                </tbody>
+                  @empty
+                    <tr>
+                      <td colspan="3">No faculties available.</td>
+                    </tr>
+                  @endforelse
               </table>
 
               <!-- Pagination Links -->
               <div class="d-flex justify-content-center mt-3">
-                {{ $products->links() }}
+                {{ $faculties->links() }}
               </div>
             </div>
             <!-- /.card-body -->

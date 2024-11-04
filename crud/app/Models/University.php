@@ -19,4 +19,9 @@ class University extends Model
     {
         return $this->hasMany(Faculty::class);
     }
+
+    public function majors()
+    {
+        return $this->hasManyThrough(Major::class, Faculty::class);
+    }
 }

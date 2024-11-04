@@ -3,30 +3,42 @@
 @section('content')
     <div class="col-md-8">
         <div class="card">
-        <div class="card-header">Company Details</div>
+            <div class="card-header">University Details</div>
 
-        <div class="card-body">
-            <table class="table table-bordered">
-            <tr>
-                <th>Name</th>
-                <td>{{ $company->name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ $company->description }}</td>
-            </tr>
-            <tr>
-                <th>Website</th>
-                <td>{{ $company->website }}</td>
-            </tr>
-            <tr>
-                <th>Logo</th>
-                <td>{{ $company->logo }}</td>
-            </tr>
-            </table>
-            <a href="{{ route('companies.edit', $company) }}" class="btn btn-warning mt-3">Edit</a>
-            <a href="{{ route('companies.index') }}" class="btn btn-primary mt-3">Back to Companies List</a>
-        </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ $university->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Faculties Count</th>
+                        <td>{{ $counts['facultiesCount'] }}</td>
+                    </tr>
+                    <tr>
+                        <th>Majors Count</th>
+                        <td>{{ $counts['majorsCount'] }}</td>
+                    </tr>
+                    <tr>
+                        <th>Groups Count</th>
+                        <td>{{ $counts['groupsCount'] }}</td>
+                    </tr>
+                    <tr>
+                        <th>Students Count</th>
+                        <td>{{ $counts['studentsCount'] }}</td>
+                    </tr>
+                    <tr>
+                        <th>Created At</th>
+                        <td>{{ $university->created_at }}</td>
+                    </tr>
+                    <tr>
+                        <th>Updated At</th>
+                        <td>{{ $university->updated_at }}</td>
+                    </tr>
+                </table>
+                <a href="{{ route('universities.edit', $university) }}" class="btn btn-warning mt-3">Edit</a>
+                <a href="{{ route('universities.index') }}" class="btn btn-primary mt-3">Back to Universities List</a>
+            </div>
         </div>
     </div>
 @endsection

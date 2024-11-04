@@ -1,50 +1,45 @@
 @extends('index')
 
 @section('content')
-<div class="pe-3">
-    <h1>Create Company</h1>
-    <form action="{{ route('companies.store') }}" method="POST" enctype="multipart/form-data">
+<div class="container">
+    <h2>Create Major</h2>
+    <form action="{{ route('majors.store') }}" method="POST">
         @csrf
+
         <div class="form-group">
-            <label for="user_id">Company Owner:</label>
-            <select name="user_id" id="user_id" class="form-control" required>
-                <option value="">Select Owner</option>
-                @foreach($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+            <label for="university_id">University:</label>
+            <select name="university_id" id="university_id" class="form-control" required>
+                <option value="">Select University</option>
+                @foreach($universities as $university)
+                    <option value="{{ $university->id }}">{{ $university->name }}</option>
                 @endforeach
             </select>
+            @error('university_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
-        @error('user_id')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+
         <div class="form-group">
-            <label for="name">Company Name:</label>
+            <label for="faculty_id">Faculty:</label>
+            <select name="faculty_id" id="faculty_id" class="form-control" required>
+                <option value="">Select Faculty</option>
+                @foreach($faculties as $faculty)
+                    <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                @endforeach
+            </select>
+            @error('faculty_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="name">Major Name:</label>
             <input type="text" class="form-control" id="name" name="name" required>
+            @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
-        @error('name')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-        <div class="form-group">
-            <label for="description">Company Description:</label>
-            <textarea class="form-control" id="description" name="description" required></textarea>
-        </div>
-        @error('description')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-        <div class="form-group">
-            <label for="website">Company Website:</label>
-            <input type="text" class="form-control" id="website" name="website" required>
-        </div>
-        @error('website')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-        <div class="form-group">
-            <label for="logo">Company Logo:</label>
-            <input type="file" class="form-control" id="logo" name="logo" required>
-        </div>
-        @error('logo')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 </div>

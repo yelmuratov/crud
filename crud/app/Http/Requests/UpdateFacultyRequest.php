@@ -11,7 +11,7 @@ class UpdateFacultyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,20 @@ class UpdateFacultyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'university_id' => ['required', 'integer', 'exists:universities,id'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'The name field is required.',
+            'name.string' => 'The name field must be a string.',
+            'name.max' => 'The name field must not exceed 255 characters.',
+            'university_id.required' => 'The university field is required.',
+            'university_id.integer' => 'The university field must be an integer.',
+            'university_id.exists' => 'The selected university is invalid.',
         ];
     }
 }

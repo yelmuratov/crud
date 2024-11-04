@@ -44,7 +44,6 @@
                   <tr>
                     <th>ID</th>
                     <th>NAME</th>
-                    <th>FACULTIES</th>
                     <th>ACTION</th>
                   </tr>
                 </thead>
@@ -53,7 +52,6 @@
                     <tr>
                       <td>{{ $university->id }}</td>
                       <td>{{ $university->name }}</td>
-                      <td>{{ $university->faculties->count() }}</td>
                       <td>
                         <a href="{{ route('universities.edit', $university) }}" class="btn btn-primary">Edit</a>
                         <a href="{{ route('universities.show', $university) }}" class="btn btn-success">Show</a>
@@ -67,7 +65,6 @@
                   @endforeach
                 </tbody>
               </table>
-
               <!-- Pagination Links -->
               <div class="d-flex justify-content-center mt-3">
                 {{ $universities->links() }}

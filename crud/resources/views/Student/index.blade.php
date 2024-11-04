@@ -1,6 +1,6 @@
 @extends('index')
 
-@section('title', 'User')
+@section('title', 'Student')
 
 @section('content')
   <!-- Content Header (Page header) -->
@@ -28,7 +28,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">DataTable with minimal features & hover style</h3>
-              <a href="{{ route('users.create') }}" class="btn btn-primary float-right">Create User</a>
+              <a href="{{ route('students.create') }}" class="btn btn-primary float-right">Create Student</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -44,20 +44,22 @@
                   <tr>
                     <th>ID</th>
                     <th>NAME</th>
-                    <th>EMAIL</th>
+                    <th>PHONE</th>
+                    <th>IMAGE</th>
                     <th>ACTION</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($users as $user)
+                  @foreach($students as $student)
                     <tr>
-                      <td>{{ $user->id }}</td>
-                      <td>{{ $user->name }}</td>
-                      <td>{{ $user->email }}</td>
+                      <td>{{ $student->id }}</td>
+                      <td>{{ $student->name }}</td>
+                      <td>{{ $student->phone }}</td>
+                      <td><img src="{{ asset('storage/' . $student->image) }}" alt="{{ $student->name }}" width="50"></td>
                       <td>
-                        <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">Edit</a>
-                        <a href="{{ route('users.show', $user) }}" class="btn btn-success">Show</a>
-                        <form action="{{ route('users.destroy', $user) }}" method="POST" style="display: inline-block">
+                        <a href="{{ route('students.edit', $student) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ route('students.show', $student) }}" class="btn btn-success">Show</a>
+                        <form action="{{ route('students.destroy', $student) }}" method="POST" style="display: inline-block">
                           @csrf
                           @method('DELETE')
                           <button type="submit" class="btn btn-danger">Delete</button>
@@ -68,7 +70,7 @@
                 </tbody>
               </table>
               <div class="d-flex justify-content-center">
-                {{ $users->links() }}
+                {{ $students->links() }}
               </div>
               
             </div>
