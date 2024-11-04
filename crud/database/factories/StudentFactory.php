@@ -20,7 +20,6 @@ class StudentFactory extends Factory
             "name" => $this->faker->unique()->name(),
             "group_id" => \App\Models\Group::factory(),
             "phone" => $this->faker->unique()->phoneNumber(),
-            "image" => $this->faker->unique()->imageUrl(),
         ];
     }
 }
