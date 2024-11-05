@@ -42,11 +42,11 @@
 				<!-- Navigation -->
 				<nav id="nav">
 					<ul class="main-menu nav navbar-nav navbar-right">
-						<li><a href="index.html">Home</a></li>
+						<li><a href="/">Home</a></li>
 						<li><a href="#">About</a></li>
 						<li><a href="#">Courses</a></li>
-						<li><a href="blog.html">Blog</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="/blogs">Blog</a></li>
+						<li><a href="/contact">Contact</a></li>
 						{{-- if user is not logged in --}}
 						@php
 							if(Auth::check()){
@@ -531,6 +531,5 @@
 		<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
-
 	</body>
 </html>

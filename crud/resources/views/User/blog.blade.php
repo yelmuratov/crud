@@ -9,23 +9,15 @@
 		<title>HTML Education Template</title>
 
 		<!-- Google font -->
-		<link href="https://fonts.googleapis.com/css?family=Lato:700%7CMontserrat:400,600" rel="stylesheet">
 
 		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+		<link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
 
 		<!-- Font Awesome Icon -->
-		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
 
-		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="css/style.css"/>
-
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+		<!-- Custom stylesheet -->
+		<link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}"/>
 
     </head>
 	<body>
@@ -37,7 +29,7 @@
 				<div class="navbar-header">
 					<!-- Logo -->
 					<div class="navbar-brand">
-						<a class="logo" href="index.html">
+						<a class="logo" href="/">
 							<img src="./img/logo.png" alt="logo">
 						</a>
 					</div>
@@ -53,11 +45,11 @@
 				<!-- Navigation -->
 				<nav id="nav">
 					<ul class="main-menu nav navbar-nav navbar-right">
-						<li><a href="index.html">Home</a></li>
+						<li><a href="/">Home</a></li>
 						<li><a href="#">About</a></li>
 						<li><a href="#">Courses</a></li>
-						<li><a href="blog.html">Blog</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="/blogs">Blog</a></li>
+						<li><a href="/contact">Contact</a></li>
 					</ul>
 				</nav>
 				<!-- /Navigation -->
@@ -77,7 +69,7 @@
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1 text-center">
 						<ul class="hero-area-tree">
-							<li><a href="index.html">Home</a></li>
+							<li><a href="/">Home</a></li>
 							<li>Blog</li>
 						</ul>
 						<h1 class="white-text">Blog Page</h1>
@@ -105,84 +97,25 @@
 						<div class="row">
 
 							<!-- single blog -->
+							@foreach($posts as $post)
 							<div class="col-md-6">
 								<div class="single-blog">
 									<div class="blog-img">
-										<a href="blog-post.html">
+										<a href="{{route('blog',$post->id)}}">
 											<img src="./img/blog01.jpg" alt="">
 										</a>
 									</div>
-									<h4><a href="blog-post.html">Pro eu error molestie deserunt. At per viderer bonorum persecuti.</a></h4>
+									<h4><a href="blog-post.html">{{$post->title}}</a></h4>
 									<div class="blog-meta">
 										<span class="blog-meta-author">By: <a href="#">John Doe</a></span>
 										<div class="pull-right">
-											<span>18 Oct, 2017</span>
+											<span>{{$post->created_at}}</span>
 											<span class="blog-meta-comments"><a href="#"><i class="fa fa-comments"></i> 35</a></span>
 										</div>
 									</div>
 								</div>
 							</div>
-							<!-- /single blog -->
-
-							<!-- single blog -->
-							<div class="col-md-6">
-								<div class="single-blog">
-									<div class="blog-img">
-										<a href="blog-post.html">
-											<img src="./img/blog02.jpg" alt="">
-										</a>
-									</div>
-									<h4><a href="blog-post.html">Pro eu error molestie deserunt. At per viderer bonorum persecuti.</a></h4>
-									<div class="blog-meta">
-										<span class="blog-meta-author">By: <a href="#">John Doe</a></span>
-										<div class="pull-right">
-											<span>18 Oct, 2017</span>
-											<span class="blog-meta-comments"><a href="#"><i class="fa fa-comments"></i> 35</a></span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /single blog -->
-
-							<!-- single blog -->
-							<div class="col-md-6">
-								<div class="single-blog">
-									<div class="blog-img">
-										<a href="blog-post.html">
-											<img src="./img/blog03.jpg" alt="">
-										</a>
-									</div>
-									<h4><a href="blog-post.html">Pro eu error molestie deserunt. At per viderer bonorum persecuti.</a></h4>
-									<div class="blog-meta">
-										<span class="blog-meta-author">By: <a href="#">John Doe</a></span>
-										<div class="pull-right">
-											<span>18 Oct, 2017</span>
-											<span class="blog-meta-comments"><a href="#"><i class="fa fa-comments"></i> 35</a></span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /single blog -->
-
-							<!-- single blog -->
-							<div class="col-md-6">
-								<div class="single-blog">
-									<div class="blog-img">
-										<a href="blog-post.html">
-											<img src="./img/blog04.jpg" alt="">
-										</a>
-									</div>
-									<h4><a href="blog-post.html">Pro eu error molestie deserunt. At per viderer bonorum persecuti.</a></h4>
-									<div class="blog-meta">
-										<span class="blog-meta-author">By: <a href="#">John Doe</a></span>
-										<div class="pull-right">
-											<span>18 Oct, 2017</span>
-											<span class="blog-meta-comments"><a href="#"><i class="fa fa-comments"></i> 35</a></span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /single blog -->
+							@endforeach
 
 						</div>
 						<!-- /row -->
@@ -318,11 +251,11 @@
 					<!-- footer nav -->
 					<div class="col-md-6">
 						<ul class="footer-nav">
-							<li><a href="index.html">Home</a></li>
+							<li><a href="/index">Home</a></li>
 							<li><a href="#">About</a></li>
 							<li><a href="#">Courses</a></li>
-							<li><a href="blog.html">Blog</a></li>
-							<li><a href="contact.html">Contact</a></li>
+							<li><a href="/blogs">Blog</a></li>
+							<li><a href="/contact">Contact</a></li>
 						</ul>
 					</div>
 					<!-- /footer nav -->
@@ -369,9 +302,9 @@
 
 
 		<!-- jQuery Plugins -->
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 
 	</body>
 </html>

@@ -7,10 +7,14 @@ use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\MajorController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\StudentController;
 
 // Public routes
 Route::get('/', [MainController::class, 'home'])->name('home');
+Route::get('/blogs', [MainController::class, 'blogs'])->name('blogs');
+Route::get('/contact', [MainController::class, 'contact'])->name('contact');
+
 
 // Routes for guests (unauthenticated users only)
 Route::middleware('guest')->group(function () {

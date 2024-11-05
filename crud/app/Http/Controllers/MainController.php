@@ -8,7 +8,7 @@ use App\Models\Major;
 use App\Models\Group;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth; // Import Auth facade
-use Illuminate\Http\Request;
+use App\Models\Post;
 
 class MainController extends Controller
 {
@@ -36,5 +36,16 @@ class MainController extends Controller
         }else{
             return view('User.index');
         }
+    }
+
+    public function blogs()
+    {   
+        $posts = Post::latest()->get();
+        return view('User.blog');
+    }
+
+    public function contact()
+    {
+        return view('User.contact');
     }
 }
