@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Meal;
 
 class MainController extends Controller
 {
-    public function home()
+    public function index()
     {
-        return view('index');
+        $meals = Meal::all();
+        return view('index',['meals' => $meals]);
     }
+
 }

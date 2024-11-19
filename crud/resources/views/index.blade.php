@@ -1,3 +1,9 @@
+<?php
+use App\Models\Meal;
+use App\Models\Ingredient;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +31,20 @@
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+
+  <!-- Bootstrap CSS (if not already included) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Select CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+
+<!-- Bootstrap and jQuery (if not already included) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Bootstrap Select JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -182,23 +202,16 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Companies -->
           <li class="nav-item">
-            <a href="/companies" class="nav-link">
+            <a href="/meals" class="nav-link">
               <i class="nav-icon fas fa-building"></i>
-              <p>Companies</p>
+              <p>Meals</p>
             </a>
           </li>
           <!-- Users -->
           <li class="nav-item">
-            <a href="/users" class="nav-link">
+            <a href="/ingredients" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
-              <p>Users</p>
-            </a>
-          </li>
-          <!-- Products -->
-          <li class="nav-item">
-            <a href="/products" class="nav-link">
-              <i class="nav-icon fas fa-box"></i>
-              <p>Products</p>
+              <p>Ingredients</p>
             </a>
           </li>
         </ul>
@@ -236,8 +249,10 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
-                <p>Users</p>
+                <h3>
+                  {{ Meal::count() }}
+                </h3>
+                <p>Meals</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -250,25 +265,11 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-                <p>Companies</p>
+                <h3>{{Ingredient::count()}}<sup style="font-size: 20px"></sup></h3>
+                <p>Ingredients</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>44</h3>
-                <p>Products</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
